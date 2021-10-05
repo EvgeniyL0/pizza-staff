@@ -1,0 +1,28 @@
+%form-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  span::before {
+    content: "";
+    display: inline-block;
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  input:checked + span::before {
+    background-color: #2563eb;
+    background-image: url("~assets/images/checked.svg");
+    border: none;
+  }
+}
