@@ -16,7 +16,7 @@ function ResultsFilter(props) {
               type="radio"
               name="sort"
               value="name"
-              checked
+              defaultChecked
               onChange={props.onChangeSort}
             />
             <span>Имя</span>
@@ -32,7 +32,7 @@ function ResultsFilter(props) {
           </label>
         </fieldset>
         <fieldset>
-          <label for="role">Должность:</label>
+          <label htmlFor="role">Должность:</label>
           <select
             name="role"
             className="filter__select"
@@ -60,7 +60,7 @@ function ResultsFilter(props) {
         </fieldset>
         <fieldset>
           <button type="button" className="filter__button" onClick={props.onClickAddPopupButton}>
-            <img src="../../images/person-plus.svg" alt />
+            <img src="../../images/person-plus.svg" alt="plus-icon" />
           </button>
         </fieldset >
       </form >

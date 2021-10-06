@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addEmployee, editEmployee, selectEmployees } from '../../features/emloyess/employeesSlice';
+import { addEmployee, selectEmployees } from '../../features/emloyess/employeesSlice';
 import ResultsFilter from '../ResultsFilter/ResultsFilter';
 import ResultsTable from '../ResultsTable/ResultsTable';
 import AddPopup from '../AddPopup/AddPopup';
 import './Results.scss';
-import arrayOfEmployees from '../../eployees.json';
 
 function Results() {
-  const employees = useSelector(selectEmployees);
+  const employees = useSelector(selectEmployees).slice().sort((a, b) => {
+    if (a["name"] < b["name"]) return -1;
+    if (a["name"] > b["name"]) return 1;
+  });
   const dispatch = useDispatch();
-  const [filteredData, setFilteredData] = useState([employees]);
+  const [filteredList, setFilteredList] = useState(employees);
   const [isArchive, setIsArchive] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
@@ -21,35 +23,35 @@ function Results() {
   }
 
   function handleChangeSort(e) {
-    const results = filteredData.slice();
     const sortBy = e.target.value;
 
     if (sortBy === "name") {
-      setFilteredData(results.sort((a, b) => {
+      setFilteredList(employees.sort((a, b) => {
         if (a[sortBy] < b[sortBy]) return -1;
         if (a[sortBy] > b[sortBy]) return 1;
       }));
+      console.log(filteredList);
     } else {
-      setFilteredData(results.sort((a, b) => {
+      setFilteredList(employees.sort((a, b) => {
         return (
           getDateFromStr(a[sortBy]) - getDateFromStr(b[sortBy])
         );
       }));
+      console.log(filteredList);
     }
   }
 
   function handleChangeRole(e) {
-    const results = filteredData.slice();
     const role = e.target.value;
 
     if (role === "все") {
-      setFilteredData(results.filter((item) => {
+      employees.filter((item) => {
         return item.isArchive === isArchive;
-      }));
+      });
     } else {
-      setFilteredData(results.filter((item) => {
+      employees.filter((item) => {
         return item.role === role && item.isArchive === isArchive;
-      }));
+      });
     }
   }
 
@@ -63,26 +65,9 @@ function Results() {
 
   function handleAddNewEmployee(e) {
     e.preventDefault();
-    dispatch(editEmployee(e.target.value));
+    dispatch(addEmployee(e.target.value));
     setShowPopup(!showPopup);
   }
-
-
-  useEffect(() => {
-    const copy = JSON.parse(localStorage.getItem("copy"));
-
-    if (copy) {
-      copy.forEach(item => {
-        dispatch(addEmployee(item));
-      });
-    } else {
-      arrayOfEmployees.forEach(item => {
-        dispatch(addEmployee(item));
-      });
-    }
-  }, [])
-
-
 
   return (
     <div className="results">
@@ -91,7 +76,7 @@ function Results() {
         onChangeRole={handleChangeRole}
         onChangeIsArchive={handleChangeIsArchive}
       />
-      <ResultsTable list={filteredData} />
+      <ResultsTable list={filteredList} />
       {showPopup && <AddPopup onAddNew={handleAddNewEmployee} onClosePopup={handleOpenClosePopup} />}
     </div>
   );

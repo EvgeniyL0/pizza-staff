@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import './ResultsTable.scss';
 
 function ResultsTable(props) {
+  let employeesList = props.list;
   return (
-    <table class="results-table">
+    <table className="results-table">
       <thead>
-        <tr class="results-table__row">
+        <tr className="results-table__row">
           <th>Имя</th>
           <th>Должность</th>
           <th>Дата рожд.</th>
@@ -18,7 +19,7 @@ function ResultsTable(props) {
       <tbody>
         {
           props.list.map(item => (
-            <tr class="results-table__row" key={item.id}>
+            <tr className="results-table__row" key={item.id}>
               <td>{item.name}</td>
               <td>{item.role}</td>
               <td>{item.birthday}</td>

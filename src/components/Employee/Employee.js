@@ -17,6 +17,13 @@ function Employee(props) {
 
   function handleChangeField(e) {
     setEmployee(employee[e.target.name] = e.target.value);
+    setValidation({
+      name: regexpName.test(employee.name),
+      phone: regexpPhone.test(employee.phone),
+      birthday: regexpDate.test(employee.birthday),
+      role: employee.role !== "",
+    });
+    setNotValid(Object.values(validation).some((item) => item === false));
   }
 
   function handleCancelButtonClick(e) {
@@ -31,13 +38,7 @@ function Employee(props) {
   }
 
   useEffect(() => {
-    setValidation({
-      name: regexpName.test(employee.name),
-      phone: regexpPhone.test(employee.phone),
-      birthday: regexpDate.test(employee.birthday),
-      role: employee.role !== "",
-    });
-    setNotValid(Object.values(validation).some((item) => item === false));
+    
   })
 
   return (

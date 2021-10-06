@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
+import arrayOfEmployees from '../../eployees.json';
 
 export const employeesSlice = createSlice({
   name: 'employees',
-  initialState: [],
+  initialState: {
+    emloyeesList: arrayOfEmployees
+  },
   reducers: {
     addEmployee: (state, action) => {
-      state.push(action.payload);
+      state.emloyeesList.push(action.payload);
     },
     editEmployee: (state, action) => {
-      const employee = state.find(item => item.id === action.payload.id);
+      const employee = state.emloyeesList.find(item => item.id === action.payload.id);
       if (employee !== undefined) {
         for (let key in employee) {
           employee[key] = action.payload[key];
@@ -20,10 +23,10 @@ export const employeesSlice = createSlice({
 
 export const { addEmployee, editEmployee } = employeesSlice.actions;
 
-export const selectEmployees = (state) => state.employess;
+export const selectEmployees = (state) => state.employees.emloyeesList;
 export const selectRoles = (state) => {
   const roles = [];
-  state.employees.forEach(item => {
+  state.employees.emloyeesList.forEach(item => {
     if (!roles.includes(item.role)) roles.push(item.role);
   });
   return roles;

@@ -13,9 +13,6 @@ function AddPopup(props) {
 
   function handleChangeField(e) {
     setEmployee(employee[e.target.name] = e.target.value);
-  }
-
-  useEffect(() => {
     setValidation({
       name: regexpName.test(employee.name),
       phone: regexpPhone.test(employee.phone),
@@ -23,6 +20,10 @@ function AddPopup(props) {
       role: employee.role !== "",
     });
     setNotValid(Object.values(validation).some((item) => item === false));
+  }
+
+  useEffect(() => {
+    
   })
 
   return (
