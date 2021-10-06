@@ -1,0 +1,26 @@
+.results-table {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  border-collapse: collapse;
+  thead {
+    th {
+      border-bottom: 1px solid #d1d5db;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    font-size: 14px;
+  }
+  @media screen and (max-width: 425px) {
+    font-size: 12px;
+  }
+}
+
+.results-table__row {
+  height: 50px;
+  &:nth-child(even) {
+    background-color: #eff6ff;
+  }
+}

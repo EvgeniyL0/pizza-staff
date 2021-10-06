@@ -22,7 +22,7 @@
   }
   input:checked + span::before {
     background-color: #2563eb;
-    background-image: url("~assets/images/checked.svg");
+    background-image: url("../../images/checked.svg");
     border: none;
   }
 }

@@ -1,18 +1,13 @@
-import React, { useState } from 'react';
-import ServerError from './ServerError';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectRoles } from '../../features/emloyess/employeesSlice';
 import './ResultsFilter.scss';
 
 function ResultsFilter(props) {
-  const [role, setRole] = useState("все");
-  const [isArchive, setIsArchive] = useState(false);
-  const [openPopup, setOpenPopup] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
-  const [error, setError] = useState(false);
-
+  const roles = useSelector(selectRoles);
 
   return (
     <div className="filter">
-      { error && <ServerError /> }
       <form className="filter__form">
         <fieldset>
           <span>Сортировать по:</span>
@@ -40,17 +35,17 @@ function ResultsFilter(props) {
           <label for="role">Должность:</label>
           <select
             name="role"
-            class="filter__select"
-            v-model="role"
-          @change="$emit('change-role', role)"
+            className="filter__select"
+            onChange={props.onChangeRole}
           >
-            <option
-              v-for="(item, index) in $store.getters.getRoles"
-              : key="index"
-            :value="item"
-            >
-              {{ item }}
-            </option>
+            <option value='all'>all</option>
+            {
+              roles.map((item, i) => (
+                <option key={i} value={item}>
+                  {item}
+                </option>
+              ))
+            }
           </select>
         </fieldset>
         <fieldset>
@@ -58,24 +53,17 @@ function ResultsFilter(props) {
             <input
               type="checkbox"
               name="status"
-              v-model="isArchive"
-              @change="$emit('change-status', isArchive)"
+              onChange={props.onChangeIsArchive}
             />
             <span>В архиве</span>
           </label>
-          </fieldset>
-          <fieldset>
-            <button type="button" className="filter__button" @click="openPopup = true">
-              <img src="../assets/images/person-plus.svg" alt />
-            </button>
-          </fieldset >
+        </fieldset>
+        <fieldset>
+          <button type="button" className="filter__button" onClick={props.onClickAddPopupButton}>
+            <img src="../../images/person-plus.svg" alt />
+          </button>
+        </fieldset >
       </form >
-      <add-popup
-        v-if="openPopup"
-        @add-new="addNewEmployee"
-        @close-popup="closePopup"
-        : loading = "showLoader"
-      />
     </div >
   )
 }

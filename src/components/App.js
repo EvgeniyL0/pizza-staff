@@ -1,23 +1,20 @@
 import React from 'react';
-import { ResultsFilter } from './ResultsFilter';
-import { ResultsTable } from './ResultsTable';
-import './App.css';
+import { Route, Switch } from "react-router-dom";
+import Results from './Results/Results';
+import Employee from './Employee/Employee';
+import './App.scss';
 
 function App() {
   return (
-    <div className="root">
-      <p className="state state_loading">Получение данных...</p>
-      <p className="state state_error">
-        Ошибка. Попробуйте обновить страницу
-    </p>
-      <div className="results">
-        <ResultsFilter
-        @change-sort="sortBy = $event"
-        @change-role="role = $event"
-        @change-status="isArchive = $event"
-        />
-        <ResultsTable : list="employees" />
-      </div>
+    <div className="main">
+      <Switch>
+        <Route exact path="/">
+          <Results />
+        </Route>
+        <Route exact path="/employees/:id">
+          <Employee />
+        </Route>
+      </Switch>
     </div>
   );
 }
