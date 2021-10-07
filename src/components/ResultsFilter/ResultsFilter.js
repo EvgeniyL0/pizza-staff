@@ -17,7 +17,7 @@ function ResultsFilter(props) {
               name="sort"
               value="name"
               defaultChecked
-              onChange={props.onChangeSort}
+              onChange={props.onChangeFilter}
             />
             <span>Имя</span>
           </label>
@@ -26,7 +26,7 @@ function ResultsFilter(props) {
               type="radio"
               name="sort"
               value="birthday"
-              onChange={props.onChangeSort}
+              onChange={props.onChangeFilter}
             />
             <span>Дата рожд.</span>
           </label>
@@ -36,7 +36,7 @@ function ResultsFilter(props) {
           <select
             name="role"
             className="filter__select"
-            onChange={props.onChangeRole}
+            onChange={props.onChangeFilter}
           >
             <option value='all'>all</option>
             {
@@ -52,8 +52,8 @@ function ResultsFilter(props) {
           <label className="filter__custom-checkbox">
             <input
               type="checkbox"
-              name="status"
-              onChange={props.onChangeIsArchive}
+              name="isArchive"
+              onChange={props.onChangeFilter}
             />
             <span>В архиве</span>
           </label>

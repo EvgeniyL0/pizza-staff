@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { selectRoles } from '../../features/emloyess/employeesSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addEmployee, selectRoles } from '../../features/emloyess/employeesSlice';
 import { regexpName, regexpPhone, regexpDate } from "../../assets/constants.js";
 import './AddPopup.scss';
 
 function AddPopup(props) {
+  const dispatch = useDispatch();
   const roles = useSelector(selectRoles);
   const blank = { id: "", name: "", isArchive: false, role: "", phone: "", birthday: "" };
   const [employee, setEmployee] = useState(blank);
@@ -12,39 +13,50 @@ function AddPopup(props) {
   const [notValid, setNotValid] = useState(true);
 
   function handleChangeField(e) {
-    setEmployee(employee[e.target.name] = e.target.value);
-    setValidation({
-      name: regexpName.test(employee.name),
-      phone: regexpPhone.test(employee.phone),
-      birthday: regexpDate.test(employee.birthday),
-      role: employee.role !== "",
-    });
-    setNotValid(Object.values(validation).some((item) => item === false));
+    let copyOfEmployee = { ...employee };
+    copyOfEmployee[e.target.name] = e.target.value;
+    setEmployee({ ...copyOfEmployee });
+  }
+
+  function handleOnAddNew(e) {
+    e.preventDefault();
+    dispatch(addEmployee(employee));
+    props.onClosePopup();
   }
 
   useEffect(() => {
-    
-  })
+    setValidation({
+      ...{
+        name: regexpName.test(employee.name),
+        phone: regexpPhone.test(employee.phone),
+        birthday: regexpDate.test(employee.birthday),
+        role: employee.role !== "",
+      }
+    });
+  }, [employee])
+
+  useEffect(() => {
+    setNotValid(Object.values(validation).some((item) => item === false));
+  }, [validation]);
 
   return (
     <div className="add-popup">
       <form
         className="add-popup__form"
-        onSubmit={props.onAddNew(employee)}
+        onSubmit={handleOnAddNew}
       >
         <img
           className="add-popup__close-icon"
           src="../../images/close.svg"
           alt="close-icon"
-          onCLick={props.onClosePopup}
+          onClick={props.onClosePopup}
         />
         <fieldset>
-          <label for="name">Фамилия Имя:</label>
+          <label htmlFor="name">Фамилия Имя:</label>
           <input
             type="text"
             name="name"
             className="add-popup__input"
-            value={employee.name}
             onChange={handleChangeField}
           />
           <span
@@ -52,12 +64,11 @@ function AddPopup(props) {
           >Введите фамилию и имя</span>
         </fieldset>
         <fieldset>
-          <label for="phone">Телефон:</label>
+          <label htmlFor="phone">Телефон:</label>
           <input
             type="tel"
             name="phone"
             className="add-popup__input"
-            value={employee.phone}
             onChange={handleChangeField}
           />
           <span
@@ -65,12 +76,11 @@ function AddPopup(props) {
           >Введите телефон в формате +7 (ххх) ххх-хххх</span>
         </fieldset >
         <fieldset>
-          <label for="birthday">Дата рождения:</label>
+          <label htmlFor="birthday">Дата рождения:</label>
           <input
             type="text"
             name="birthday"
             className="add-popup__input"
-            value={employee.birthday}
             onChange={handleChangeField}
           />
           <span
@@ -78,12 +88,13 @@ function AddPopup(props) {
           >Введите дату в формате ДД.ММ.ГГГГ</span>
         </fieldset >
         <fieldset>
-          <label for="role">Должность:</label>
+          <label htmlFor="role">Должность:</label>
           <select
             className="add-popup__select"
             name="role"
             onChange={handleChangeField}
           >
+            <option>---</option>
             {
               roles.map((item, i) => (
                 <option key={i} value={item}>

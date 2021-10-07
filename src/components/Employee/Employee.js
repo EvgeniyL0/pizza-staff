@@ -11,19 +11,14 @@ function Employee(props) {
   const employees = useSelector(selectEmployees);
   const roles = useSelector(selectRoles);
   const dispatch = useDispatch();
-  const [employee, setEmployee] = useState(employees.find(item => item.id === id));
+  const [employee, setEmployee] = useState(employees.find(item => item.id == id));
   const [validation, setValidation] = useState({ name: false, phone: false, birthday: false, role: false });
   const [notValid, setNotValid] = useState(true);
 
   function handleChangeField(e) {
-    setEmployee(employee[e.target.name] = e.target.value);
-    setValidation({
-      name: regexpName.test(employee.name),
-      phone: regexpPhone.test(employee.phone),
-      birthday: regexpDate.test(employee.birthday),
-      role: employee.role !== "",
-    });
-    setNotValid(Object.values(validation).some((item) => item === false));
+    let copyOfEmployee = { ...employee };
+    copyOfEmployee[e.target.name] = e.target.value;
+    setEmployee({ ...copyOfEmployee });
   }
 
   function handleCancelButtonClick(e) {
@@ -38,12 +33,23 @@ function Employee(props) {
   }
 
   useEffect(() => {
-    
-  })
+    setValidation({
+      ...{
+        name: regexpName.test(employee.name),
+        phone: regexpPhone.test(employee.phone),
+        birthday: regexpDate.test(employee.birthday),
+        role: employee.role !== "",
+      }
+    });
+  }, [employee])
+
+  useEffect(() => {
+    setNotValid(Object.values(validation).some((item) => item === false));
+  }, [validation]);
 
   return (
-    <div class="profile">
-      <form class="profile__form" onSubmit={handleFormSubmit}>
+    <div className="profile">
+      <form className="profile__form" onSubmit={handleFormSubmit}>
         <input
           type="text"
           name="name"

@@ -1,0 +1,110 @@
+@import "../../styles/blocks/button.scss",
+  "../../styles/blocks/form-input.scss";
+
+.add-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-popup__form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 430px;
+  min-height: 430px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 4px;
+  text-align: center;
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    padding: 0;
+    label {
+      margin-bottom: 10px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 350px;
+  }
+
+  @media screen and (max-width: 580px) {
+    width: 300px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 425px) {
+    width: 280px;
+  }
+}
+
+.add-popup__input {
+  @extend %form-input;
+  width: 300px;
+  height: 35px;
+
+  @media screen and (max-width: 580px) {
+    width: 230px;
+  }
+}
+
+.add-popup__select {
+  @extend %form-input;
+  width: 180px;
+  height: 35px;
+  box-sizing: content-box;
+}
+
+.add-popup__error-message {
+  font-size: 16px;
+  color: white;
+  margin-bottom: 15px;
+
+  @media screen and (max-width: 580px) {
+    font-size: 14px;
+  }
+}
+
+.add-popup__error-message_show {
+  @extend .add-popup__error-message;
+  color: #ef4444;
+}
+
+.add-popup__button {
+  @extend %button;
+  width: 230px;
+  height: 50px;
+  margin-top: 15px;
+
+  @media screen and (max-width: 580px) {
+    width: 200px;
+  }
+}
+
+.add-popup__close-icon {
+  position: absolute;
+  top: -27px;
+  right: -27px;
+  cursor: pointer;
+
+  @media screen and (max-width: 580px) {
+    top: -20px;
+    right: -20px;
+    width: 20px;
+    height: 20px;
+  }
+}
