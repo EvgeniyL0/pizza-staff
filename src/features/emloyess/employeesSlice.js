@@ -20,7 +20,6 @@ export const employeesSlice = createSlice({
     copyToStorage: (state) => {
       localStorage.removeItem("copy");
       localStorage.setItem("copy", JSON.stringify(state.emloyeesList));
-      console.log(JSON.parse(localStorage.getItem("copy")));
     }
   },
 });

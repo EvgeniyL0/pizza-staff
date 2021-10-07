@@ -97,7 +97,7 @@ function Employee(props) {
           }
         </select >
         <label className="profile__custom-checkbox">
-          <input type="checkbox" name="isArchive" value={employee.isArchive} onChange={handleChangeField} />
+          <input type="checkbox" name="isArchive" checked={employee.isArchive} onChange={handleChangeField} />
           <span>В архиве</span>
         </label>
         <fieldset>
