@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { addEmployee } from '../features/emloyess/employeesSlice';
 import Results from './Results/Results';
 import Employee from './Employee/Employee';
-import PageNotFound from './PageNotFound/PageNotFound';
 import './App.scss';
 import arrayOfEmployees from '../assets/eployees.json';
 
@@ -34,9 +33,6 @@ function App() {
         </Route>
         <Route exact path="/employees/:id">
           <Employee />
-        </Route>
-        <Route path="*">
-          <PageNotFound />
         </Route>
       </Switch>
     </div>
