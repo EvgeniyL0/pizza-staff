@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectRoles } from '../../features/emloyess/employeesSlice';
 import './ResultsFilter.scss';
+import { ReactComponent as PlusIcon } from '../../images/plus.svg';
 
 function ResultsFilter(props) {
   const roles = useSelector(selectRoles);
@@ -60,7 +61,7 @@ function ResultsFilter(props) {
         </fieldset>
         <fieldset>
           <button type="button" className="filter__button" onClick={props.onClickAddPopupButton}>
-            <img src="../../images/person-plus.svg" alt="plus-icon" />
+            <PlusIcon />
           </button>
         </fieldset >
       </form >

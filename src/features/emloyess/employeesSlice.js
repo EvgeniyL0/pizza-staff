@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import arrayOfEmployees from '../../eployees.json';
 
 export const employeesSlice = createSlice({
   name: 'employees',
   initialState: {
-    emloyeesList: arrayOfEmployees
+    emloyeesList: []
   },
   reducers: {
     addEmployee: (state, action) => {
@@ -18,10 +17,15 @@ export const employeesSlice = createSlice({
         }
       }
     },
+    copyToStorage: (state) => {
+      localStorage.removeItem("copy");
+      localStorage.setItem("copy", JSON.stringify(state.emloyeesList));
+      console.log(JSON.parse(localStorage.getItem("copy")));
+    }
   },
 });
 
-export const { addEmployee, editEmployee } = employeesSlice.actions;
+export const { addEmployee, editEmployee, copyToStorage } = employeesSlice.actions;
 
 export const selectEmployees = (state) => state.employees.emloyeesList;
 export const selectRoles = (state) => {

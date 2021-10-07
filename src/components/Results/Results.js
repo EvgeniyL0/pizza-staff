@@ -9,7 +9,7 @@ function Results() {
   const [showPopup, setShowPopup] = useState(false);
 
   function handleChangeFilter(e) {
-    let copyOfFilter = {...filterOut};
+    let copyOfFilter = { ...filterOut };
 
     if (e.target.type === "checkbox") {
       copyOfFilter[e.target.name] = e.target.checked;
@@ -17,7 +17,7 @@ function Results() {
       copyOfFilter[e.target.name] = e.target.value;
     }
 
-    setFilterOut({...copyOfFilter});
+    setFilterOut({ ...copyOfFilter });
   }
 
   function handleOpenClosePopup(e) {

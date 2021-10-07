@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectEmployees } from '../../features/emloyess/employeesSlice';
 import { Link } from "react-router-dom";
 import './ResultsTable.scss';
+import { ReactComponent as EditIcon } from '../../images/edit.svg';
 
 function ResultsTable(props) {
   const employees = useSelector(selectEmployees);
@@ -65,7 +66,7 @@ function ResultsTable(props) {
               <td>{item.isArchive ? "да" : "нет"}</td>
               <td>
                 <Link to={`/employees/${item.id}`}>
-                  <img src="../assets/images/edit.svg" alt="edit-icon" />
+                  <EditIcon />
                 </Link>
               </td>
             </tr>

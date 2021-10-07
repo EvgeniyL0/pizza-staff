@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { editEmployee, selectEmployees, selectRoles } from '../../features/emloyess/employeesSlice';
+import { editEmployee, copyToStorage, selectEmployees, selectRoles } from '../../features/emloyess/employeesSlice';
 import { regexpName, regexpPhone, regexpDate } from "../../assets/constants.js";
 import './Employee.scss';
+import avatar from '../../images/avatar.png';
 
 function Employee(props) {
   let { id } = useParams();
@@ -17,7 +18,12 @@ function Employee(props) {
 
   function handleChangeField(e) {
     let copyOfEmployee = { ...employee };
-    copyOfEmployee[e.target.name] = e.target.value;
+
+    if (e.target.type === "checkbox") {
+      copyOfEmployee[e.target.name] = e.target.checked;
+    } else {
+      copyOfEmployee[e.target.name] = e.target.value;
+    }
     setEmployee({ ...copyOfEmployee });
   }
 
@@ -29,6 +35,7 @@ function Employee(props) {
   function handleFormSubmit(e) {
     e.preventDefault();
     dispatch(editEmployee(employee));
+    dispatch(copyToStorage());
     history.goBack();
   }
 
@@ -90,7 +97,7 @@ function Employee(props) {
           }
         </select >
         <label className="profile__custom-checkbox">
-          <input type="checkbox" name="status" value={employee.isArchive} onChange={handleChangeField} />
+          <input type="checkbox" name="isArchive" value={employee.isArchive} onChange={handleChangeField} />
           <span>В архиве</span>
         </label>
         <fieldset>
@@ -105,7 +112,7 @@ function Employee(props) {
         </fieldset >
       </form >
       <img
-        src="../../assets/images/avatar.png"
+        src={avatar}
         alt="employee-avatar"
         className="profile__avatar"
       />

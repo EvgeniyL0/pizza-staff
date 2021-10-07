@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addEmployee, selectRoles } from '../../features/emloyess/employeesSlice';
+import { addEmployee, copyToStorage, selectRoles } from '../../features/emloyess/employeesSlice';
 import { regexpName, regexpPhone, regexpDate } from "../../assets/constants.js";
 import './AddPopup.scss';
 
@@ -21,6 +21,7 @@ function AddPopup(props) {
   function handleOnAddNew(e) {
     e.preventDefault();
     dispatch(addEmployee(employee));
+    dispatch(copyToStorage());
     props.onClosePopup();
   }
 
