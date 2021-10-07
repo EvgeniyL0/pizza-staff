@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.10d7b04c.chunk.css",
+    "main.js": "/static/js/main.2a0cd7d1.chunk.js",
+    "main.js.map": "/static/js/main.2a0cd7d1.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8129dcac.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8129dcac.js.map",
+    "static/js/2.d3bf2daf.chunk.js": "/static/js/2.d3bf2daf.chunk.js",
+    "static/js/2.d3bf2daf.chunk.js.map": "/static/js/2.d3bf2daf.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.10d7b04c.chunk.css.map": "/static/css/main.10d7b04c.chunk.css.map",
+    "static/js/2.d3bf2daf.chunk.js.LICENSE.txt": "/static/js/2.d3bf2daf.chunk.js.LICENSE.txt",
+    "static/media/avatar.ab01c844.png": "/static/media/avatar.ab01c844.png",
+    "static/media/Employee.scss": "/static/media/checked.a5d0c97b.svg",
+    "static/media/edit.10d45cd4.svg": "/static/media/edit.10d45cd4.svg",
+    "static/media/plus.eb7b6679.svg": "/static/media/plus.eb7b6679.svg",
+    "static/media/sad-face.bd14eca1.svg": "/static/media/sad-face.bd14eca1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8129dcac.js",
+    "static/js/2.d3bf2daf.chunk.js",
+    "static/css/main.10d7b04c.chunk.css",
+    "static/js/main.2a0cd7d1.chunk.js"
+  ]
+}
