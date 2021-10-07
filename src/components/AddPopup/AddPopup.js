@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee, copyToStorage, selectRoles } from '../../features/emloyess/employeesSlice';
 import { regexpName, regexpPhone, regexpDate } from "../../assets/constants.js";
 import './AddPopup.scss';
+import CloseIcon from '../../images/close.svg';
 
 function AddPopup(props) {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function AddPopup(props) {
         name: regexpName.test(employee.name),
         phone: regexpPhone.test(employee.phone),
         birthday: regexpDate.test(employee.birthday),
-        role: employee.role !== "",
+        role: employee.role !== "---",
       }
     });
   }, [employee])
@@ -48,7 +49,7 @@ function AddPopup(props) {
       >
         <img
           className="add-popup__close-icon"
-          src="../../images/close.svg"
+          src={CloseIcon}
           alt="close-icon"
           onClick={props.onClosePopup}
         />
